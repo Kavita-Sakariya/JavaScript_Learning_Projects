@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>API of KAVITA SAKARIYA</h1>
+    <img src="" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;" id="img"/>
+    <button id="btn">Show</button>
+    <h3 id="name" style="color:rgb(4, 115, 152)"></h3>
+</body>
+<script>
+    const url = 'https://api.github.com/users/Kavita-Sakariya';
+    const btn = document.getElementById('btn');
+    const img = document.getElementById('img');
+    const name = document.getElementById('name');
+
+    btn.addEventListener('click', function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                console.log(data.name);
+                img.src = data.avatar_url; // Set the image src to the avatar URL from the API response
+                name.textContent = `Name: ${data.name}`; // Optionally display the number of followers
+            }
+        };
+    });
+</script>
+</html>
